@@ -1,0 +1,12 @@
+{
+  "name": "algo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.1"
+  },
+  "scripts": {
+    "dev": "serve -p 3001"
+  }
+}
