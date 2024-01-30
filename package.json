@@ -7,6 +7,7 @@
     "serve": "^14.2.1"
   },
   "scripts": {
-    "dev": "serve -p 3001"
+    "dev:es": "serve -p 3001 ./essentials",
+    "dev:uds": "serve -p 3002 ./dsaa"
   }
 }

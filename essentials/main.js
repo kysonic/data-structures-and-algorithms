@@ -189,21 +189,21 @@ const binarySearch = (arr, findEl) => {
     }
 
     if (arr[mid] < findEl) {
-      start = mid + 1; 
+      start = mid + 1;
     } else {
       end = mid - 1;
     }
   }
 
   return -1;
-} 
+};
 const arr7 = [-300, -21, -20, 1, 10, 29, 99, 100, 993];
 console.log(binarySearch(arr7, 99));
 
 // https://hackernoon.com/a-beginners-guide-to-bfs-and-dfs-in-javascript
-// Поиск по графу в глубину или ширину
+// Траверсинг по графу в глубину или ширину
 // Graph search algorithms Deep First Search / Breadth First Search
-// Graph BFS/DFS 
+// Graph BFS/DFS
 // https://app.diagrams.net/#G11t-hD2kTE0_OskNTtBCBScWZH19nxfZO
 // adjacency list / Список смежных вершин
 const graph = {
@@ -215,22 +215,17 @@ const graph = {
   F: ['E'],
 };
 
-const bfs = (graph, findEl) => {
-  const start = Object.keys(graph)[0];
+const bfs = (graph, start) => {
   const queue = [start];
   const visited = new Set();
-  const path = [];
+  const result = [];
 
-  while(queue.length) {
+  while (queue.length) {
     const vertex = queue.shift();
-
-    if (vertex === findEl) {
-      path.push(findEl);
-      break;
-    }
 
     if (!visited.has(vertex)) {
       visited.add(vertex);
+      result.push(vertex);
 
       for (const neighbor of graph[vertex]) {
         queue.push(neighbor);
@@ -238,7 +233,83 @@ const bfs = (graph, findEl) => {
     }
   }
 
-  return path;
+  return result;
+};
+
+console.log(bfs(graph, 'A'));
+
+const dfs = (graph, start) => {
+  const stack = [start];
+  const visited = new Set();
+  const result = [];
+
+  while (stack.length) {
+    const vertex = stack.pop();
+
+    if (!visited.has(vertex)) {
+      visited.add(vertex);
+      result.push(vertex);
+
+      for (const neighbor of graph[vertex]) {
+        stack.push(neighbor);
+      }
+    }
+  }
+
+  return result;
+};
+
+console.log(dfs(graph, 'A'));
+
+// Tree / Дерево
+
+const createNode = (value, left, right) => ({ value, left, right });
+// https://app.diagrams.net/#G11t-hD2kTE0_OskNTtBCBScWZH19nxfZO
+const tree = createNode(
+  1,
+  createNode(2, createNode(4), createNode(5)),
+  createNode(3, createNode(6), createNode(7))
+);
+
+const tbfs = (tree) => {
+  const queue = [tree];
+  const result = [];
+
+  while (queue.length) {
+    const node = queue.shift();
+    result.push(node.value);
+    if (node.left) {
+      queue.push(node.left);
+    }
+    if (node.right) {
+      queue.push(node.right);
+    }
+  }
+
+  return result;
 }
 
-console.log(bfs(graph, 'F'));
+console.log(tbfs(tree));
+
+
+const tdfs = (tree) => {
+  const stack = [tree];
+  const result = [];
+
+  while (stack.length) {
+    const node = stack.pop();
+    result.push(node.value);
+    if (node.left) {
+      stack.push(node.left);
+    }
+    if (node.right) {
+      stack.push(node.right);
+    }
+  }
+
+  return result;
+}
+
+console.log(tdfs(tree));
+
+// 
