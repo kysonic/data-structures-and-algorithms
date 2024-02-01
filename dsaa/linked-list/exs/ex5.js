@@ -50,68 +50,89 @@ Remember to update the length.
  */
 
 class Node {
-  constructor(value){
-      this.value = value;
-      this.next = null;
+  constructor(value) {
+    this.value = value;
+    this.next = null;
   }
 }
 
 class LinkedList {
   constructor(value) {
-      const newNode = new Node(value);
-      this.head = newNode;
-      this.length = 1;
+    const newNode = new Node(value);
+    this.head = newNode;
+    this.length = 1;
   }
 
   printList() {
-      let temp = this.head;
-      while (temp !== null) {
-          console.log(temp.value);
-          temp = temp.next;
-      }
+    let temp = this.head;
+    while (temp !== null) {
+      console.log(temp.value);
+      temp = temp.next;
+    }
   }
 
   getHead() {
-      if (this.head === null) {
-          console.log("Head: null");
-      } else {
-          console.log("Head: " + this.head.value);
-      }
+    if (this.head === null) {
+      console.log('Head: null');
+    } else {
+      console.log('Head: ' + this.head.value);
+    }
   }
 
   getLength() {
-      console.log("Length: " + this.length);
+    console.log('Length: ' + this.length);
   }
 
   makeEmpty() {
-      this.head = null;
-      this.length = 0;
+    this.head = null;
+    this.length = 0;
   }
 
-push(value) {
-  const newNode = new Node(value);
-  if (!this.head) {
-    this.head = newNode;
-  } else {
-    let current = this.head;
-    while (current.next !== null) {
-      current = current.next;
+  push(value) {
+    const newNode = new Node(value);
+    if (!this.head) {
+      this.head = newNode;
+    } else {
+      let current = this.head;
+      while (current.next !== null) {
+        current = current.next;
+      }
+      current.next = newNode;
     }
-    current.next = newNode;
+    this.length++;
   }
-  this.length++;
+
+  // WRITE THE REMOVEDUPLICATES METHOD HERE //
+  //                                        //
+  //                                        //
+  //                                        //
+  //                                        //
+  ////////////////////////////////////////////
+  removeDuplicates() {
+    const set = new Set();
+    let temp = this.head;
+
+    while (temp) {
+      set.add(temp.value);
+      temp = temp.next;
+    }
+
+    let node = new Node(0);
+    const start = node;
+
+    set.forEach((value) => {
+      node.next = new Node(value);
+      node = node.next;
+    });
+
+    this.head = start.next;
+    node.next = null;
+    this.tail = node;
+    this.length = set.size;
+
+    return this;
+  }
 }
-
-// WRITE THE REMOVEDUPLICATES METHOD HERE // 
-//                                        //
-//                                        //
-//                                        //
-//                                        //
-////////////////////////////////////////////
-
-}
-
-
 
 let myLinkedList = new LinkedList(1);
 myLinkedList.push(2);
@@ -121,16 +142,13 @@ myLinkedList.push(4);
 myLinkedList.push(5);
 myLinkedList.push(5);
 
-
-console.log("Original list:");
+console.log('Original list:');
 myLinkedList.printList();
 
 myLinkedList.removeDuplicates();
 
-console.log("\nList after removing duplicates:");
+console.log('\nList after removing duplicates:');
 myLinkedList.printList();
-
-
 
 /*
   EXPECTED OUTPUT:
