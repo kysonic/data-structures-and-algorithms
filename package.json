@@ -1,13 +1,14 @@
 {
-  "name": "algo",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
-  "devDependencies": {
-    "serve": "^14.2.1"
-  },
-  "scripts": {
-    "dev:es": "serve -p 3001 ./essentials",
-    "dev:uds": "serve -p 3002 ./dsaa"
-  }
+    "name": "algo",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "type": "module",
+    "devDependencies": {
+        "serve": "^14.2.1"
+    },
+    "scripts": {
+        "dev:es": "serve -p 3001 ./essentials",
+        "dev:uds": "serve -p 3002 ./dsaa"
+    }
 }

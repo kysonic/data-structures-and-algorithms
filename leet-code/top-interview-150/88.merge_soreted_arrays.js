@@ -28,4 +28,4 @@ function merge(nums1, m, nums2, n) {
 const array1 = [1, 2, 3, 0, 0, 0];
 const array2 = [2, 5, 6];
 merge(array1, 3, array2, 3);
-assert.equal(array1, [1, 2, 2, 3, 5, 6]);
+assert.deepStrictEqual(array1, [1, 2, 2, 3, 5, 6]);
