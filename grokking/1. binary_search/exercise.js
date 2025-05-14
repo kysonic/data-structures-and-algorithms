@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 
-
+// Идея - элемент по середине больше или меньше текущего? Меняем интервал поиска.
 function binarySearch(arr, elem) {
-   
+    
 }
 
 // Элемент в середине массива
