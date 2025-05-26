@@ -17,6 +17,7 @@ graph['Maxim'] = ['Elena'];
 // Основная идея поиск по уровню графа, то есть сначала ищем на первом уровне потом на втором
 // потом на третьем, пока на найдем. Более оптимальный вариант работы - использование очереди
 // в JavaScript очередь (как и стек) можно реализовать с помощью обычного массива
+// Важный момент - запоминаем кого уже проверили, иначе можно войти в бесконечный цикл
 function bfs(graph, a, b) {
     const queue = graph[a];
     const searched = new Set();
@@ -31,6 +32,7 @@ function bfs(graph, a, b) {
         searched.add(elem);
 
         if (elem === b) {
+            // Тут может быть функция проверка любого условия
             return true;
         }
 
@@ -40,7 +42,7 @@ function bfs(graph, a, b) {
     return false;
 }
 
-//
+// Можно ли добраться от узла A до B 
 assert.deepStrictEqual(bfs(graph, 'Anton', 'Kushka'), true);
 
 console.log('Прошло!');
