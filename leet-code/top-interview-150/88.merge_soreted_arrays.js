@@ -29,3 +29,8 @@ const array1 = [1, 2, 3, 0, 0, 0];
 const array2 = [2, 5, 6];
 merge(array1, 3, array2, 3);
 assert.deepStrictEqual(array1, [1, 2, 2, 3, 5, 6]);
+
+const array3 = [1];
+const array4 = [];
+merge(array3, 1, array4, 0);
+assert.deepStrictEqual(array3, [1]);
