@@ -39,3 +39,17 @@ function insertionSort(arr) {
 
   return arr;
 }
+
+function insertionSort2(arr) {
+    for (let i = 1; i < arr.length; i++) {
+        let k = i;
+        while (k > 0) {
+            if (arr[k] < arr[k - 1]) {
+                [arr[k], arr[k - 1]] = [arr[k - 1], arr[k]];
+            }
+            k--;
+        }    
+    }
+
+    return arr;
+}
