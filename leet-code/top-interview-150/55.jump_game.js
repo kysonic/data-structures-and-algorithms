@@ -10,41 +10,42 @@ import assert from 'node:assert/strict';
  * @param {number[]} nums
  * @return {boolean}
  */
-function canJump(nums, ci = 0) {
-    console.log(ci, nums[ci]);
-
-    if (ci + nums[ci] >= nums.length - 1) {
-        return true;
+function canJump(nums) {
+    let maxReach = 0;
+    
+    for (let i = 0; i < nums.length; i++) {
+        // Dead end condition: if current index is beyond what we can reach
+        if (i > maxReach) {
+            return false;
+        }
+        
+        // Update the farthest index we can reach
+        maxReach = Math.max(maxReach, i + nums[i]);
+        
+        // If we can already reach the last index
+        if (maxReach >= nums.length - 1) {
+            return true;
+        }
     }
-
-    if (nums[ci] === 0) {
-        return false;
-    }
-
-    let can = canJump(nums, ci + nums[ci]);
-
-    if (!can && ci + nums[ci] - 1 > 0) {
-        can = canJump(nums, ci + nums[ci] - 1);
-    }
-
-    return can;
+    
+    return maxReach >= nums.length - 1;
 }
 
 // // Explanation: Jump 1 step from index 0 to 1, then 3 steps to the last index.
-// assert.equal(canJump([2, 3, 1, 1, 4]), true);
+assert.equal(canJump([2, 3, 1, 1, 4]), true);
 // // Explanation: You will always arrive at index 3 no matter what.
 // // Its maximum jump length is 0, which makes it impossible to reach the last index.
-// assert.equal(canJump([3, 2, 1, 0, 4]), false);
+assert.equal(canJump([3, 2, 1, 0, 4]), false);
 // // Explanation: 0 at the latest position
-// assert.equal(canJump([1, 1, 1, 0]), true);
+assert.equal(canJump([1, 1, 1, 0]), true);
 // // Explanation: a few zeros
-// assert.equal(canJump([2, 0, 1, 0, 1]), false);
+assert.equal(canJump([2, 0, 1, 0, 1]), false);
 // // Explanation: zero in the middle
-// assert.equal(canJump([2, 0, 2]), true);
+assert.equal(canJump([2, 0, 2]), true);
 // // Explanation: binnary
-// assert.equal(canJump([1, 0, 1, 0]), false);
+assert.equal(canJump([1, 0, 1, 0]), false);
 // // Explanation: binnary
-// assert.equal(canJump([2, 5, 0, 0]), true);
+assert.equal(canJump([2, 5, 0, 0]), true);
 // Explanation: binnary
 assert.equal(canJump([5, 9, 3, 2, 1, 0, 2, 3, 3, 1, 0, 0]), true);
 
